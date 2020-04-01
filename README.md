@@ -1,80 +1,78 @@
-# streamloots-events
+# mix-it-up-api
 
-![npm](https://img.shields.io/npm/v/streamloots-events)
-![npm bundle size](https://img.shields.io/bundlephobia/min/streamloots-events)
-![npm](https://img.shields.io/npm/dt/streamloots-events)
-![NPM](https://img.shields.io/npm/l/streamloots-events)
+![npm](https://img.shields.io/npm/v/mix-it-up-api)
+![npm bundle size](https://img.shields.io/bundlephobia/min/mix-it-up-api)
+![npm](https://img.shields.io/npm/dt/mix-it-up-api)
+![NPM](https://img.shields.io/npm/l/mix-it-up-api)
 
-> Simplifies subscribing Streamloots-Events with TypeScript
+> Simplifies calling the devAPI of Mix It Up with TypeScript
 
-This package makes it easier to listen for Streamloots-Events such as card redemptions using [TypeScript](http://www.typescriptlang.org/). It wraps the popular [web-request](https://www.npmjs.com/package/web-request) package, extending it with an interface for [Streamloots](https://www.streamloots.com/).
-
-> Disclaimer: This is not an official supported API of Streamloots! This is more of a clever workaround.
+This package makes it easier to call the devAPI of Mix It Up such as running a command using [TypeScript](http://www.typescriptlang.org/). It wraps the popular [web-request](https://www.npmjs.com/package/web-request) package, extending it with an interface for [Mix It Up](https://mixitupapp.com/).
 
 ## Examples
 
-Get redeemed card...
+Get user data by username...
 ```js
-const streamlootsStream = StreamlootsRequest.listen("Your-Alert-ID");
+const client = new MixItUpClient();
 
-streamlootsStream
-  .on('redemption', cardObj => {
-    console.log(cardObj.toString());
+client.users.getUserByName("D4ddy-LiLd4rk")
+  .then(user => {
+    console.log(user);
+  })
+  .catch(err => {
+    console.log(err);
   });
 ```
 
-Get purchased chests...
+Send a message to the chat...
 ```js
-const streamlootsStream = StreamlootsRequest.listen("Your-Alert-ID");
+const client = new MixItUpClient();
 
-streamlootsStream
-  .on('purchase', purchaseObj => {
-    console.log(purchaseObj.toString());
+client.chat.sendChatMessage("Greetings to the chat!", false)
+  .catch(err => {
+    console.log(err);
   });
 ```
 
-Get gifted chests...
+Run the requested command...
 ```js
-const streamlootsStream = StreamlootsRequest.listen("Your-Alert-ID");
+const client = new MixItUpClient();
 
-streamlootsStream
-  .on('gift', giftObj => {
-    console.log(giftObj.toString());
+client.commands.runCommandByID("YOUR-COMMAND-ID")
+  .catch(err => {
+    console.log(err);
   });
 ```
 
 ## Getting Started
 
-Make sure you're running Node v4 and TypeScript 1.7 or higher...
+Make sure you're running Node v13 and TypeScript 3.7 or higher...
 ```
 $ node -v
-v4.2.6
+v13.11.0
 $ npm install -g typescript tsd
 $ tsc -v
-Version 1.7.5
+Version 3.7.5
 ```
 
-Install the *streamloots-events* package and the typings definitions for Node.js...
+Install the *mix-it-up-api* package and the typings definitions for Node.js...
 ```
-$ npm install streamloots-events
+$ npm install mix-it-up-api
 $ tsd install node
 ```
 
 Write some code...
 ```js
-import * as StreamlootsRequest from "streamloots-events";
+import * as MixItUpClient from "mix-it-up-api";
 
-const streamlootsStream = StreamlootsRequest.listen("Your-Alert-ID");
+const client = new MixItUpClient();
 
-streamlootsStream
-  .on('gift', giftObj => {
-    console.log(giftObj.toString());
+client.users.getUserByName("D4ddy-LiLd4rk")
+  .then(user => {
+    console.log(user);
   })
-  .on('purchase', purchaseObj => {
-    console.log(purchaseObj.toString());
-  })
-  .on('redemption', cardObj => {
-    console.log(cardObj.toString());
+  .catch(err => {
+    console.log(err);
   });
 ```
 
@@ -87,18 +85,20 @@ $ node index.js
 
 To use the sample with your own account, do the following steps:
 
-* Head over to Streamloots: https://www.streamloots.com/
+* Head over to Streamloots: https://mixitupapp.com/#download
 
-* Go to Alerts
+* Install Mix it Up
 
-  ![Alerts](https://i.imgur.com/JvzshSF.png)
+* Log in with your Mixer Account
 
-* Click on the grayed out box that says "Click here to show URL"
+* Go to Services
 
-  ![Alert Box](https://i.imgur.com/2z4PnfW.png)
+  ![Services](https://i.imgur.com/Xza5kPr.png)
 
-* Copy the GUID value at the end of your alerts URL, this is your alerts ID. The format of the URL is: https://widgets.streamloots.com/alerts/< GUID >
+* Open the Developer API Panel and hit that "Enable" Button.
 
-  ![Alert Box](https://i.imgur.com/4LhASIv.png)
+  ![Enable devAPI](https://i.imgur.com/6Bx4XH0.png)
 
-Special Thanks to [SaviorXTanren](https://github.com/SaviorXTanren/streamloots-service-sample) for his inspirational code over on GitHub.
+* Call the devAPI from your code!
+
+Special Thanks to [SaviorXTanren](https://saviorxtanren.github.io/mixer-mixitup/#section/Introduction) for his work on the Chatbot and his Documentation of this devAPI over on GitHub.
