@@ -1,6 +1,6 @@
 {
   "name": "mix-it-up-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Package to call the devAPI of Mix It Up Chatbot",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
