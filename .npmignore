@@ -1,0 +1,8 @@
+lib/
+main.*
+test.*
+tsconfig.json
+tsd.json
+*.js.map
+typings
+.vscode
